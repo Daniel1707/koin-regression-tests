@@ -15,4 +15,4 @@ RUN bundle install
 COPY . $APP_HOME
 
 # Start server
-CMD ["ruby", "teste.rb"]
+CMD ["cucumber"]

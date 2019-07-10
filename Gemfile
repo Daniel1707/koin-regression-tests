@@ -3,4 +3,5 @@ source 'https://rubygems.org' do
   gem 'cpf_cnpj'
   gem 'cucumber'
   gem 'httparty'
+  gem 'chromedriver-helper'
 end

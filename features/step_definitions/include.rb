@@ -1,14 +1,16 @@
 require 'json'
 
-Given("create data valid to include API") do
+Given("create valid data to include API") do
   header = {
-    "Authorization" => "8F6EC0BCB5634511A01B67785054E19E,VbH1VC/EjkeSuehEjetcjjdAMRCC/vBtDL8Z980isx2PUkLr2EHOrpkNRhydjsFy90JZZb59t5mcK2CNBYNhnA==,1560797432477",
+    "Authorization" => ENV['AUTHORIZATION_INCLUDE_API'],
     "Content-Type" => "application/json"
   }
 
+  body = IncludeJson.get_body_new_order_id
+
   @options = {
    headers: header,
-   body: IncludeJson.get_body
+   body: body
   }
 end
 
@@ -24,4 +26,5 @@ Then("system return sucess message and purchase link") do
 
   Validator.check(response_message, "Solicitação enviada com sucesso. Estamos aguardando o cliente finalizar a compra!", "Mensagem diferente da esperada")
   Validator.check(response_code.to_s, "11200", "Codigo diferente do esperado")
+  p "URL: #{response_url_complete}"
 end

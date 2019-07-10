@@ -74,6 +74,14 @@ class IncludeJson
   }'
 
   def self.get_body
-    return @include_body
+    return JSON.parse(@include_body)
+  end
+
+  def self.get_body_new_order_id
+    body_json = JSON.parse(@include_body)
+    body_json["OrderID"] = rand(10000000..99999999).to_s
+    body = body_json.to_json
+
+    return body
   end
 end
