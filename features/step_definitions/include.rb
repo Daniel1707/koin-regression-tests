@@ -37,7 +37,7 @@ Then("open link to finish purchase") do
   @checkout_page.openPage(@response_url_complete)
 end
 
-Then("accept purchase in in cash") do
+When("accept purchase in in cash") do
   @checkout_page.fill_birthdate("10071991")
   @checkout_page.click_on_in_cash
   @checkout_page.click_on_accept_terms
@@ -50,16 +50,17 @@ Then(/^system will finish purchase with sucessuful and status ([^"]*)$/) do |sta
   Validator.check(found_message, true, "Did not find message #{status}")
 end
 
-Then("go to Aquarius and open order in manual analyse") do
+When("go to Aquarius and open order in manual analyse") do
   @aquarius_page = AquariusPage.new(@driver, @wait)
   @aquarius_page.openPage
-
   @aquarius_page.login(ENV['AQUARIUS_USER'], ENV['AQUARIUS_PASSWORD'])
 
   @aquarius_page.clickOnManualAnalyse
-
   @aquarius_page.fill_manual_analyse_filter_order(IncludeJson.get_order_id)
   @aquarius_page.click_on_start_manual_analyse
+end
+
+Then("approve order") do
   @aquarius_page.click_on_approve
   @aquarius_page.fill_limit("100000")
   @aquarius_page.fill_observation("Teste")

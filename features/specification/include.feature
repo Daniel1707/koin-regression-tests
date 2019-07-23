@@ -5,6 +5,7 @@ Scenario: Valid Include
   When send data to include
   When system return success message and purchase link
   Then open link to finish purchase
-  Then accept purchase in in cash
+  When accept purchase in in cash
   Then system will finish purchase with sucessuful and status Pedido em análise
-  Then go to Aquarius and open order in manual analyse
+  When go to Aquarius and open order in manual analyse
+  Then approve order
