@@ -9,6 +9,7 @@ class AquariusPage
 
   def openPage
     @driver.get ENV['ACQUARIUS_ENV']
+    @driver.manage.window.maximize
     sleep 1
   end
 
@@ -36,6 +37,68 @@ class AquariusPage
     @driver.action.move_to(creditoButton).perform
     @driver.find_element(:xpath, '//span[text()="Análise Manual "]').click
   end
+
+
+
+
+
+  def fill_manual_analyse_filter_order(order)
+    order_field = @wait.until { @driver.find_element(:xpath, "//input[@title='Digite o número do pedido']") }
+    order_field.send_keys(order)
+    sleep 2
+    @driver.find_element(:xpath, '//button[text()=" Consultar
+                        "]').click
+  end
+
+  def click_on_start_manual_analyse
+    sleep 2
+    start_manual_analyse = @wait.until { @driver.find_element(:xpath, "//a[@title='Iniciar Análise']/i") }
+    start_manual_analyse.click
+  end
+
+  def click_on_postpone
+    postergar = @wait.until { @driver.find_element(:xpath, '//button[text()="Postergar"]') }
+    postergar.click
+  end
+
+  def click_on_approve
+    sleep 5
+    approve = @wait.until { @driver.find_element(:xpath, '//button[text()="Aprovar"]') }
+    approve.click
+  end
+
+  def click_on_disapprove
+    disapprove = @wait.until { @driver.find_element(:xpath, '//button[text()="Reprovar"]') }
+    disapprove.click
+  end
+
+  def click_on_cancel
+    cancel = @wait.until { @driver.find_element(:xpath, '//button[text()="Cancelar"]') }
+    cancel.click
+  end
+
+  def fill_limit(limit)
+    limit_field = @wait.until { @driver.find_element(:xpath, "//input[@title='Digite o Limite']") }
+    limit_field.clear
+    limit_field.send_keys(limit)
+  end
+
+  def fill_observation(observation)
+    observation_field = @wait.until { @driver.find_element(:xpath, '//label[text()="Observação"]/..//textarea') }
+    observation_field.send_keys(observation)
+  end
+
+  def click_on_confirm
+    sleep 5
+    confirm = @wait.until { @driver.find_element(:xpath, '//button[text()=" Confirmar
+				"]') }
+    confirm.click
+  end
+
+
+
+
+
 
   def fill_comunication_log(cpf)
     cpfField = @wait.until { @driver.find_element(:xpath, "//input[@title='Digite o CPF a ser pesquisado']") }

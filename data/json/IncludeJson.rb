@@ -3,7 +3,7 @@ require 'json'
 class IncludeJson
 
   @include_body = '{
-      "OrderID": "retretret",
+      "OrderID": "sadsda52344",
       "Proposal": "",
       "Currency": "BRL",
       "TotalPrice": "722.1",
@@ -79,9 +79,14 @@ class IncludeJson
 
   def self.get_body_new_order_id
     body_json = JSON.parse(@include_body)
-    body_json["OrderID"] = rand(10000000..99999999).to_s
+    @order_id = rand(10000000..99999999).to_s
+    body_json["OrderID"] = @order_id
     body = body_json.to_json
 
     return body
+  end
+
+  def self.get_order_id
+    return @order_id
   end
 end

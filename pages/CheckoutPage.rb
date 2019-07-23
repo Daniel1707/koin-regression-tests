@@ -9,6 +9,7 @@ class CheckoutPage
 
   def openPage(url)
     @driver.get url
+    @driver.manage.window.maximize
     sleep 1
   end
 
@@ -23,7 +24,24 @@ class CheckoutPage
   end
 
   def click_on_finish_purchase
-    in_cash_button = @wait.until { @driver.find_element(:xpath, "//label[text()='Finalizar compra']") }
+    in_cash_button = @wait.until { @driver.find_element(:xpath, "//button[text()='Finalizar compra']") }
     in_cash_button.click
+  end
+
+  def click_on_accept_terms
+    accept_terms = @wait.until { @driver.find_element(:id, "idTermsAccepted") }
+    accept_terms.click
+  end
+
+  def has_status_message(status)
+    has_message = false
+
+    begin
+      has_message = @driver.find_element(:xpath, "/html/body").text.include? status
+    rescue
+      has_message = false
+    end
+
+    return has_message
   end
 end
