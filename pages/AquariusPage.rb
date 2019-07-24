@@ -38,10 +38,6 @@ class AquariusPage
     @driver.find_element(:xpath, '//span[text()="Análise Manual "]').click
   end
 
-
-
-
-
   def fill_manual_analyse_filter_order(order)
     order_field = @wait.until { @driver.find_element(:xpath, "//input[@title='Digite o número do pedido']") }
     order_field.send_keys(order)
@@ -68,11 +64,22 @@ class AquariusPage
   end
 
   def click_on_disapprove
+    sleep 5
     disapprove = @wait.until { @driver.find_element(:xpath, '//button[text()="Reprovar"]') }
     disapprove.click
   end
 
+  def select_reason(reason)
+    sleep 2
+    click_reason = @wait.until { @driver.find_element(:xpath, "//button[@title='Selecione o Motivo']") }
+    click_reason.click
+
+    reason = @driver.find_element(:xpath, "//button[@title='Selecione o Motivo']/..//span[text()='#{reason}']")
+    reason.click
+  end
+
   def click_on_cancel
+    sleep 5
     cancel = @wait.until { @driver.find_element(:xpath, '//button[text()="Cancelar"]') }
     cancel.click
   end
@@ -89,16 +96,11 @@ class AquariusPage
   end
 
   def click_on_confirm
-    sleep 5
+    sleep 3
     confirm = @wait.until { @driver.find_element(:xpath, '//button[text()=" Confirmar
 				"]') }
     confirm.click
   end
-
-
-
-
-
 
   def fill_comunication_log(cpf)
     cpfField = @wait.until { @driver.find_element(:xpath, "//input[@title='Digite o CPF a ser pesquisado']") }
@@ -116,5 +118,19 @@ class AquariusPage
   def get_part_link_from_phone
     sentDate = @wait.until { @driver.find_element(:xpath, "//td[@title='phone']./td[1]") }
     sentDate.get_text
+  end
+
+  def get_manual_analyse_text_field(label_text)
+    sleep 3
+    label_element = @wait.until { @driver.find_element(:xpath, "//label[text()='#{label_text}']/..//div/span") }
+    label_element.text
+  end
+
+  def logout
+    sleep 3
+    name_to_logout = @wait.until { @driver.find_element(:xpath, "//div[@ng-if='session.user']") }
+    name_to_logout.click
+
+    @driver.find_element(:xpath, '//span[text()="Sair"]').click
   end
 end

@@ -60,9 +60,70 @@ When("go to Aquarius and open order in manual analyse") do
   @aquarius_page.click_on_start_manual_analyse
 end
 
-Then("approve order") do
+Then("fields from data client are correct") do
+  status = @aquarius_page.get_manual_analyse_text_field("Status do Cliente")
+  Validator.check(status, "P_NOVO", "Did not find.")
+
+  cpf = @aquarius_page.get_manual_analyse_text_field("CPF")
+  Validator.check(cpf, "404.901.988-48", "Did not find.")
+
+  nome = @aquarius_page.get_manual_analyse_text_field("Nome Completo")
+  Validator.check(nome, "Postman - API Include", "Did not find.")
+end
+
+Then("fields from address are correct") do
+  logradouro = @aquarius_page.get_manual_analyse_text_field("Logradouro")
+  Validator.check(logradouro, "Rua Rio de Janeiro 909", "Did not find.")
+
+  bairro = @aquarius_page.get_manual_analyse_text_field("Bairro")
+  Validator.check(bairro, "Centro", "Did not find.")
+
+  city = @aquarius_page.get_manual_analyse_text_field("Cidade(UF)")
+  Validator.check(city, "Belo Horizonte - MG", "Did not find.")
+
+  cep = @aquarius_page.get_manual_analyse_text_field("CEP")
+  Validator.check(cep, "30160-913", "Did not find.")
+end
+
+Then("fields from data purchase are correct") do
+  store_name = @aquarius_page.get_manual_analyse_text_field("Nome da Loja")
+  Validator.check(store_name, "Decolar", "Did not find.")
+
+  installment_amount = @aquarius_page.get_manual_analyse_text_field("Valor da Parcela")
+  Validator.check(installment_amount, "1x R$ 722,10", "Did not find.")
+
+  total_amount = @aquarius_page.get_manual_analyse_text_field("Valor total")
+  Validator.check(total_amount, "R$ 722,10", "Did not find.")
+
+  description = @aquarius_page.get_manual_analyse_text_field("Descrição")
+  Validator.check(description, "Origem no aeroporto GRU, com destino no aeroporto YYZ", "Did not find.")
+
+  description = @aquarius_page.get_manual_analyse_text_field("Descrição")
+  Validator.check(description, "Origem no aeroporto GRU, com destino no aeroporto YYZ", "Did not find.")
+
+  passengers_name = @aquarius_page.get_manual_analyse_text_field("Nome dos Passageiros")
+  Validator.check(passengers_name, "1 - ROSÂNGELA HUDSON JANUÁRIO", "Did not find.")
+end
+
+Then("approve order with higher limit") do
   @aquarius_page.click_on_approve
   @aquarius_page.fill_limit("100000")
   @aquarius_page.fill_observation("Teste")
   @aquarius_page.click_on_confirm
+  @aquarius_page.logout
+end
+
+Then(/^disapprove order for reason ([^"]*)$/) do |reason|
+  @aquarius_page.click_on_disapprove
+  @aquarius_page.select_reason(reason)
+  @aquarius_page.fill_observation("Teste")
+  @aquarius_page.click_on_confirm
+  @aquarius_page.logout
+end
+
+Then("cancel order") do
+  @aquarius_page.click_on_cancel
+  @aquarius_page.fill_observation("Teste")
+  @aquarius_page.click_on_confirm
+  @aquarius_page.logout
 end
