@@ -10,6 +10,7 @@ require '././apis/SPApi'
 require '././data/json/IncludeJson'
 require '././data/json/Request'
 require '././data/json/Check'
+require '././data/json/AuthorizationJson'
 
 require '././utils/ConfigDriver'
 require '././utils/Validator'
