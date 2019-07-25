@@ -67,7 +67,7 @@ Then("fields from data client are correct") do
   Validator.check(status, "P_NOVO", "Did not find.")
 
   cpf = @aquarius_page.get_manual_analyse_text_field("CPF")
-  Validator.check(cpf, "404.901.988-48", "Did not find.")
+  Validator.check(cpf, IncludeJson.get_cpf_formatted, "Did not find.")
 
   nome = @aquarius_page.get_manual_analyse_text_field("Nome Completo")
   Validator.check(nome, "Postman - API Include", "Did not find.")

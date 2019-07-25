@@ -14,7 +14,7 @@ class IncludeJson
           "Documents": [
               {
                   "Type": "CPF",
-                  "Number": "40490198848"
+                  "Number": ""
               }
           ],
           "Phones": [
@@ -81,16 +81,21 @@ class IncludeJson
   def self.get_body_new_order_id
     body_json = JSON.parse(@include_body)
     # @order_id = rand(10000000..99999999).to_s
-    @cpf = CPF.generate.to_s
+    @cpf = CPF.generate
 
-    body_json["OrderID"] = @cpf
-    body_json["Buyer"]["Documents"][0]["Number"] = @cpf
+    body_json["OrderID"] = @cpf.to_s
+    body_json["Buyer"]["Documents"][0]["Number"] = @cpf.to_s
+    body_json["Buyer"]["Email"] = "#{@cpf.to_s}@koin.com.br"
     body = body_json.to_json
 
     return body
   end
 
   def self.get_order_id
-    return @cpf
+    return @cpf.to_s
+  end
+
+  def self.get_cpf_formatted
+    return CPF.new(@cpf).formatted
   end
 end

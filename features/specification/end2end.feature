@@ -1,10 +1,5 @@
 Feature: End2End
 
-Scenario: Invalid Password
-  Given we navigate to the lojista login page
-  When fill user 77754962000160 and password 000000
-  Then system will show message that user or password are invalid
-
 Scenario: Create include and approve in manual analyse
   Given create valid data to include API
   When send data to include
@@ -42,7 +37,7 @@ Scenario: Create request and cancel in manual analyse
   Given create valid data to request API
   When send data to request
   Then system return success message
-  
+
 Scenario: Manual Analyse Approve from seller page
   Given we navigate to the lojista login page
   When fill user 77754962000160 and password 123456
