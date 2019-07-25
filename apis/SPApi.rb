@@ -16,4 +16,8 @@ class SPApi
   def post_payment_request_check(options)
     self.class.post("/PaymentRequest/check", options)
   end
+
+  def post_transaction_authorization(options)
+    self.class.post("/Transaction/authorization", options)
+  end
 end
