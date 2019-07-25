@@ -1,5 +1,7 @@
 require 'json'
 
+AppEnvironment.get_environment_variables
+
 Given("we navigate to the lojista login page") do
   config_driver = ConfigDriver.new("chrome")
   @driver = config_driver.get_driver

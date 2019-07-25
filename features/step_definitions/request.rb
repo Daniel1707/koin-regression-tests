@@ -1,5 +1,7 @@
 require 'json'
 
+AppEnvironment.get_environment_variables
+
 Given("create valid data to request API") do
   header = {
     "Authorization" => ENV['AUTHORIZATION_REQUEST_API'],
