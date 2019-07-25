@@ -1,6 +1,8 @@
 class AppEnvironment
   def self.get_environment_variables
-    if ENV['ENV'].eql? "hmg-risks"
+    if ENV['ENV'].eql? "hmg-sellers"
+
+    else
       ENV['LOJISTA_ENV'] = 'http://hmg-risks-front-login.koin.com.br'
       ENV['LOJISTA_USER'] = '77754962000160'
       ENV['LOJISTA_PASSWORD'] = '123456'

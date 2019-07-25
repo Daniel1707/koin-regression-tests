@@ -4,4 +4,5 @@ source 'https://rubygems.org' do
   gem 'cucumber'
   gem 'httparty'
   gem 'chromedriver-helper'
+  gem 'mysql2'
 end
