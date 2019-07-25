@@ -9,4 +9,8 @@ class SPApi
     self.class.post("/PaymentRequest/include", options)
   end
 
+  def post_transaction_service_request(options)
+    self.class.post("/V1/TransactionService.svc/Request", options)
+  end
+
 end

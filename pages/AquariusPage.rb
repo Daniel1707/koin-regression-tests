@@ -39,6 +39,7 @@ class AquariusPage
   end
 
   def fill_manual_analyse_filter_order(order)
+    sleep 2
     order_field = @wait.until { @driver.find_element(:xpath, "//input[@title='Digite o número do pedido']") }
     order_field.send_keys(order)
     sleep 2

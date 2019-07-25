@@ -8,6 +8,7 @@ require '././pages/CheckoutPage'
 
 require '././apis/SPApi'
 require '././data/json/IncludeJson'
+require '././data/json/Request'
 
 require '././utils/ConfigDriver'
 require '././utils/Validator'

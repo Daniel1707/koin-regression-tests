@@ -1,4 +1,5 @@
 require 'json'
+require 'cpf_cnpj'
 
 class IncludeJson
 
@@ -79,14 +80,17 @@ class IncludeJson
 
   def self.get_body_new_order_id
     body_json = JSON.parse(@include_body)
-    @order_id = rand(10000000..99999999).to_s
-    body_json["OrderID"] = @order_id
+    # @order_id = rand(10000000..99999999).to_s
+    @cpf = CPF.generate.to_s
+
+    body_json["OrderID"] = @cpf
+    body_json["Buyer"]["Documents"][0]["Number"] = @cpf
     body = body_json.to_json
 
     return body
   end
 
   def self.get_order_id
-    return @order_id
+    return @cpf
   end
 end
