@@ -47,6 +47,35 @@ class AquariusPage
                         "]').click
   end
 
+  def click_on_consult
+    consult_button = @wait.until { @driver.find_element(:xpath, '//button[text()=" Consultar
+                        "]') }
+    consult_button.click
+  end
+
+  def select_status_from_manual_analyse(status)
+    sleep 1
+    status_button = @wait.until { @driver.find_element(:xpath, "//button[@title='Selecione o tipo']") }
+    status_button.click
+
+    status = @driver.find_element(:xpath, "//button[@title='Selecione o tipo']/..//span[text()='#{status}']")
+    status.click
+  end
+
+  def get_result_manual_analyse_data(name)
+
+    found_data = false
+
+    begin
+      @wait.until { @driver.find_element(:xpath, "//td[text()='#{name}']") }
+      found_data = true
+    rescue
+      found_data = false
+    end
+
+    return found_data
+  end
+
   def click_on_start_manual_analyse
     sleep 2
     start_manual_analyse = @wait.until { @driver.find_element(:xpath, "//a[@title='Iniciar Análise']/i") }

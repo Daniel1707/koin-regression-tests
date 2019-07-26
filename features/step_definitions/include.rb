@@ -47,7 +47,7 @@ When("accept purchase in in cash") do
 end
 
 Then(/^system will finish purchase with sucessuful and status ([^"]*)$/) do |status|
-  sleep 5
+  sleep 3
   found_message = @checkout_page.has_status_message(status.force_encoding(Encoding::UTF_8))
   Validator.check(found_message, true, "Did not find message #{status}")
 end
@@ -60,6 +60,49 @@ When("go to Aquarius and open order in manual analyse") do
   @aquarius_page.clickOnManualAnalyse
   @aquarius_page.fill_manual_analyse_filter_order(IncludeJson.get_order_id)
   @aquarius_page.click_on_start_manual_analyse
+end
+
+When("go to Aquarius and open order in manual analyse using CPF") do
+  config_driver = ConfigDriver.new("chrome")
+  @driver = config_driver.get_driver
+  @wait = config_driver.get_wait
+
+  @aquarius_page = AquariusPage.new(@driver, @wait)
+  @aquarius_page.openPage
+  @aquarius_page.login(ENV['AQUARIUS_USER'], ENV['AQUARIUS_PASSWORD'])
+
+  @aquarius_page.clickOnManualAnalyse
+  @aquarius_page.fill_manual_analyse_filter_order(ENV['CPF'])
+  @aquarius_page.click_on_start_manual_analyse
+end
+
+When("go to Aquarius and search order in manual analyse using CPF") do
+  config_driver = ConfigDriver.new("chrome")
+  @driver = config_driver.get_driver
+  @wait = config_driver.get_wait
+
+  @aquarius_page = AquariusPage.new(@driver, @wait)
+  @aquarius_page.openPage
+  @aquarius_page.login(ENV['AQUARIUS_USER'], ENV['AQUARIUS_PASSWORD'])
+
+  @aquarius_page.clickOnManualAnalyse
+  @aquarius_page.fill_manual_analyse_filter_order(ENV['CPF'])
+end
+
+Then("order will be expired by scheduler") do
+  sleep 90
+  @aquarius_page.select_status_from_manual_analyse("Finalizado")
+  @aquarius_page.click_on_consult
+  sleep 5
+
+  name = "expiration_job"
+  decision = "Cancelado"
+
+  user_name = @aquarius_page.get_result_manual_analyse_data(name)
+  user_decision = @aquarius_page.get_result_manual_analyse_data(decision)
+
+  Validator.check(user_name, true, "Did not find USER.")
+  Validator.check(user_decision, true, "Did not find DECISION.")
 end
 
 Then("fields from data client are correct") do

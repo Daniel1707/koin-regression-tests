@@ -16,6 +16,20 @@ Given("create valid data to request API") do
   }
 end
 
+Given("create data to expire in Request API") do
+  header = {
+    "Authorization" => ENV['AUTHORIZATION_REQUEST_API'],
+    "Content-Type" => "application/json"
+  }
+
+  @body = Request.get_body_new_reference
+
+  @options = {
+   headers: header,
+   body: @body
+  }
+end
+
 When("send data to request") do
   sp_api = SPApi.new
   @response_body = sp_api.post_transaction_service_request(@options)

@@ -1,5 +1,6 @@
 require 'json'
 require 'cpf_cnpj'
+require 'date'
 
 class Request
 
@@ -165,7 +166,12 @@ class Request
     body_json["Buyer"]["Email"] = "#{@cpf}@koin.com.br"
     body_json["Buyer"]["Documents"][0]["Value"] = @cpf
     body_json["Buyer"]["Name"] = "Teste #{@cpf}"
+
+    body_json["AdditionalParameters"]["ExpirationDate"] = DateUtil.get_current_date_plus_minute(1)
+
     body = body_json.to_json
+
+    ENV['CPF'] = @cpf
 
     return body
   end

@@ -45,6 +45,16 @@ And("fill solicitation with new data") do
   @lojista_page.clickIncludeSolicitation
 end
 
+And(/^fill solicitation with CPF (\d+)$/) do |cpf|
+  @pedidoRandom = rand(10000000..99999999)
+  @amount = "500000"
+  ENV['CPF'] = cpf
+
+  @lojista_page.fillPaymentSolicitation(ENV['CPF'], ENV['CPF'], "20112019", @amount)
+  @lojista_page.clickConsultAvailability
+  @lojista_page.clickIncludeSolicitation
+end
+
 And("fill data buyer with new data confirming solicitation") do
   @lojista_page.fillIncludeSolicitation("Teste", "Teste", "17/07/1991", "(99)99999-9999", "#{@pedidoRandom}@koin.com.br", "06122-100", "12")
 

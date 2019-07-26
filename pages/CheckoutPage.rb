@@ -37,6 +37,7 @@ class CheckoutPage
     has_message = false
 
     begin
+      @wait.until { @driver.find_element(:xpath, "/html/body") }
       has_message = @driver.find_element(:xpath, "/html/body").text.include? status
     rescue
       has_message = false
