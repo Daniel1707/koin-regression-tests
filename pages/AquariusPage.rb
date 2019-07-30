@@ -163,4 +163,34 @@ class AquariusPage
 
     @driver.find_element(:xpath, '//span[text()="Sair"]').click
   end
+
+  def click_on_transacao
+    @wait.until { @driver.find_element(:xpath, "//a[@permission='OPERACOES']") }
+    operations = @driver.find_element(:xpath, "//a[@permission='OPERACOES']")
+    sleep 3
+    @driver.action.move_to(operations).perform
+    @driver.find_element(:xpath, '//span[text()="Transação "]').click
+  end
+
+  def search_by_cpf_transaction(cpf)
+    sleep 1
+    cpf_field = @wait.until { @driver.find_element(:xpath, "//input[@title='Digite o CPF do comprador a ser pesquisado']") }
+    cpf_field.send_keys(cpf)
+    sleep 3
+    @driver.find_element(:xpath, '//button[text()=" Consultar
+						"]').click
+  end
+
+  def has_data_transaction(data)
+    found_data = false
+
+    begin
+      @wait.until { @driver.find_element(:xpath, "//td[text()='#{data}']") }
+      found_data = true
+    rescue
+      found_data = false
+    end
+
+    return found_data
+  end
 end

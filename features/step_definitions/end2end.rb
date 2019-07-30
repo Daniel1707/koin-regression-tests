@@ -15,6 +15,11 @@ When(/^fill user (\d+) and password (\d+)$/) do |user, password|
   @lojista_page.login(user, password)
 end
 
+When("go to transaction menu and search transaction by CPF") do
+  @aquarius_page.click_on_transacao
+  @aquarius_page.search_by_cpf_transaction(ENV['CPF'])
+end
+
 Then("system will show lojista home page") do
   name = ENV['LOJISTA_NAME'].dup
   found_name = @lojista_page.is_logged(name.force_encoding(Encoding::UTF_8))
@@ -86,4 +91,9 @@ end
 
 And("go to Manual Analyse") do
   @aquarius_page.clickOnManualAnalyse
+end
+
+Then(/^internal code is equal to ([^"]*)$/) do |internal_code|
+  has_internal_code = @aquarius_page.has_data_transaction(internal_code)
+  Validator.check(has_internal_code, true, "Did not find internal code #{internal_code}.")
 end

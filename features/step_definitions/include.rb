@@ -16,6 +16,20 @@ Given("create valid data to include API") do
   }
 end
 
+Given("create valid data to include API using CPF approved automatic") do
+  header = {
+    "Authorization" => ENV['AUTHORIZATION_INCLUDE_API'],
+    "Content-Type" => "application/json"
+  }
+
+  @body = IncludeJson.get_body_cpf_approved_automatic
+
+  @options = {
+   headers: header,
+   body: @body
+  }
+end
+
 When("send data to include") do
   sp_api = SPApi.new
   @response_body = sp_api.post_payment_request_include(@options)
@@ -28,6 +42,14 @@ When("system return success message and purchase link") do
 
   Validator.check(response_message, "Solicitação enviada com sucesso. Estamos aguardando o cliente finalizar a compra!", "Mensagem diferente da esperada")
   Validator.check(response_code.to_s, "11200", "Codigo diferente do esperado")
+end
+
+Then("system return message that buyer can not use koin") do
+  response_message = @response_body.parsed_response['Message']
+  response_code = @response_body.parsed_response['Code']
+
+  Validator.check(response_message, "Infelizmente não será possível prosseguir com a solicitação! Sugerimos que utilize outra forma de pagamento.", "Mensagem diferente da esperada")
+  Validator.check(response_code.to_s, "11300", "Codigo diferente do esperado")
 end
 
 Then("open link to finish purchase") do
@@ -47,7 +69,7 @@ When("accept purchase in in cash") do
 end
 
 Then(/^system will finish purchase with sucessuful and status ([^"]*)$/) do |status|
-  sleep 3
+  sleep 6
   found_message = @checkout_page.has_status_message(status.force_encoding(Encoding::UTF_8))
   Validator.check(found_message, true, "Did not find message #{status}")
 end
@@ -90,7 +112,7 @@ When("go to Aquarius and search order in manual analyse using CPF") do
 end
 
 Then("order will be expired by scheduler") do
-  sleep 90
+  sleep 140
   @aquarius_page.select_status_from_manual_analyse("Finalizado")
   @aquarius_page.click_on_consult
   sleep 5
@@ -151,6 +173,7 @@ Then("fields from data purchase are correct") do
 end
 
 Then("approve order with higher limit") do
+  sleep 1
   @aquarius_page.click_on_approve
   @aquarius_page.fill_limit("100000")
   @aquarius_page.fill_observation("Teste")

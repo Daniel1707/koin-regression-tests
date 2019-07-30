@@ -83,7 +83,39 @@ class IncludeJson
     # @order_id = rand(10000000..99999999).to_s
     @cpf = CPF.generate
 
+    ENV['CPF'] = @cpf
+
     body_json["OrderID"] = @cpf.to_s
+    body_json["Buyer"]["Documents"][0]["Number"] = @cpf.to_s
+    body_json["Buyer"]["Email"] = "#{@cpf.to_s}@koin.com.br"
+    body = body_json.to_json
+
+    return body
+  end
+
+  def self.get_body_cpf_approved_automatic
+    body_json = JSON.parse(@include_body)
+    @order_id = rand(10000000..99999999).to_s
+    @cpf = ENV["CPF_APPRROVED"]
+
+    ENV['CPF'] = @cpf
+
+    body_json["OrderID"] = @order_id
+    body_json["Buyer"]["Documents"][0]["Number"] = @cpf.to_s
+    body_json["Buyer"]["Email"] = "#{@cpf.to_s}@koin.com.br"
+    body = body_json.to_json
+
+    return body
+  end
+
+  def self.get_body_cpf_disapproved_automatic
+    body_json = JSON.parse(@include_body)
+    @order_id = rand(10000000..99999999).to_s
+    @cpf = ENV["CPF_DISAPPRROVED"]
+
+    ENV['CPF'] = @cpf
+
+    body_json["OrderID"] = @order_id
     body_json["Buyer"]["Documents"][0]["Number"] = @cpf.to_s
     body_json["Buyer"]["Email"] = "#{@cpf.to_s}@koin.com.br"
     body = body_json.to_json

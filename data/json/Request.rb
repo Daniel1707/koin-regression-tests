@@ -167,11 +167,13 @@ class Request
     body_json["Buyer"]["Documents"][0]["Value"] = @cpf
     body_json["Buyer"]["Name"] = "Teste #{@cpf}"
 
-    body_json["AdditionalParameters"]["ExpirationDate"] = DateUtil.get_current_date_plus_minute(1)
+    body_json["AdditionalParameters"]["ExpirationDate"] = DateUtil.get_current_date_plus_minute(2)
 
     body = body_json.to_json
 
     ENV['CPF'] = @cpf
+
+    p "BODY: #{body}"
 
     return body
   end
