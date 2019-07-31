@@ -28,7 +28,6 @@ class AquariusPage
   end
 
   def login(user, password)
-
     user_name = ENV['AQUARIUS_NAME'].dup
     found_user_name = is_logged(user_name.force_encoding(Encoding::UTF_8))
 
@@ -59,6 +58,7 @@ class AquariusPage
     @driver.action.move_to(creditoButton).perform
 
     manual_analyse_button = @wait.until { @driver.find_element(:xpath, '//span[text()="Análise Manual "]') }
+    sleep 1
     manual_analyse_button.click
   end
 

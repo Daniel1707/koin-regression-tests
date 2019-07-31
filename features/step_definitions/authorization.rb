@@ -28,7 +28,3 @@ Then("system return success message for authorization") do
   response_code = @response_body.parsed_response['Code']
   Validator.check(response_code, "12200", "Code diferente do esperado")
 end
-
-Given("connect to database") do
-  p MysqlConnection.connect
-end

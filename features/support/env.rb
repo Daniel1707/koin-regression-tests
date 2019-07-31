@@ -18,5 +18,6 @@ require '././utils/Validator'
 require '././utils/DateUtil'
 require '././utils/DataExtractor'
 require '././utils/Email'
+require '././utils/Screenshot'
 
 require '././database/MysqlConnection'
