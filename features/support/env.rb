@@ -16,4 +16,7 @@ require '././data/json/AuthorizationJson'
 require '././utils/ConfigDriver'
 require '././utils/Validator'
 require '././utils/DateUtil'
+require '././utils/DataExtractor'
+require '././utils/Email'
+
 require '././database/MysqlConnection'

@@ -7,7 +7,7 @@ class LojistaPage
     @wait = wait
   end
 
-  def openPage
+  def open_page
     @driver.get ENV['LOJISTA_ENV']
     @driver.manage.window.maximize
     sleep 1

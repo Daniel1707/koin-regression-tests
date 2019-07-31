@@ -10,7 +10,27 @@ class Email
   end
 
   def get_email_message(date, from)
-    email = @gmail.inbox.emails(:on => Date.parse(date), :from => from)
+
+    found_message = false
+    count = 0
+
+    while found_message.eql? false do
+
+      email = @gmail.inbox.emails(:on => Date.parse(date), :from => from)
+
+      if email[0].eql? nil
+        found_message = false
+        sleep 1
+        count = count +1
+      else
+        found_message = true
+      end
+
+      if count.eql? 120
+        raise "There is no message searching by date [#{date}] and from [#{from}]"
+      end
+    end
+
     email[0].message.body.decoded.to_s
   end
 

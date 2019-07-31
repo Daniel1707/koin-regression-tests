@@ -7,13 +7,35 @@ class AquariusPage
     @wait = wait
   end
 
-  def openPage
+  def open_page
     @driver.get ENV['ACQUARIUS_ENV']
     @driver.manage.window.maximize
     sleep 1
   end
 
+  def is_logged(user)
+    sleep 2
+
+    user_logged = false
+
+    begin
+      user_logged = @driver.find_element(:xpath, "//span[text()='#{user}']").displayed?
+    rescue
+    	user_logged = false
+    end
+
+    return user_logged
+  end
+
   def login(user, password)
+
+    user_name = ENV['AQUARIUS_NAME'].dup
+    found_user_name = is_logged(user_name.force_encoding(Encoding::UTF_8))
+
+    if found_user_name.eql? true
+      logout
+    end
+
     userField = @wait.until { @driver.find_element(:xpath, "//input[@type='text']") }
     userField.send_keys(user)
 
@@ -35,7 +57,9 @@ class AquariusPage
     creditoButton = @driver.find_element(:xpath, "//a[@permission='CREDITO']")
     sleep 3
     @driver.action.move_to(creditoButton).perform
-    @driver.find_element(:xpath, '//span[text()="Análise Manual "]').click
+
+    manual_analyse_button = @wait.until { @driver.find_element(:xpath, '//span[text()="Análise Manual "]') }
+    manual_analyse_button.click
   end
 
   def fill_manual_analyse_filter_order(order)
@@ -109,8 +133,8 @@ class AquariusPage
   end
 
   def click_on_cancel
-    sleep 5
     cancel = @wait.until { @driver.find_element(:xpath, '//button[text()="Cancelar"]') }
+    sleep 4
     cancel.click
   end
 
@@ -135,19 +159,22 @@ class AquariusPage
   def fill_comunication_log(cpf)
     cpfField = @wait.until { @driver.find_element(:xpath, "//input[@title='Digite o CPF a ser pesquisado']") }
     cpfField.send_keys(cpf)
-    sleep 1
-    @driver.find_element(:xpath, '//button[text()=" Consultar
-						"]').click
+    sleep 3
+
+    button = @wait.until { @driver.find_element(:xpath, '//button[text()=" Consultar
+						"]') }
+    button.click
   end
 
   def click_on_send_date
+    sleep 2
     sentDate = @wait.until { @driver.find_element(:xpath, "//a[@title='Exibe detalhes do log de e-mail']") }
     sentDate.click
   end
 
   def get_part_link_from_phone
-    sentDate = @wait.until { @driver.find_element(:xpath, "//td[@title='phone']./td[1]") }
-    sentDate.get_text
+    sent_date = @wait.until { @driver.find_element(:xpath, "//td[text()='phone']/..//td[2]") }
+    sent_date.text
   end
 
   def get_manual_analyse_text_field(label_text)
@@ -157,11 +184,12 @@ class AquariusPage
   end
 
   def logout
-    sleep 3
-    name_to_logout = @wait.until { @driver.find_element(:xpath, "//div[@ng-if='session.user']") }
+    name_to_logout = @wait.until { @driver.find_element(:xpath, "//div[@ng-if='session.user']//a") }
+    sleep 5
     name_to_logout.click
 
-    @driver.find_element(:xpath, '//span[text()="Sair"]').click
+    exit = @wait.until { @driver.find_element(:xpath, '//span[text()="Sair"]') }
+    exit.click
   end
 
   def click_on_transacao

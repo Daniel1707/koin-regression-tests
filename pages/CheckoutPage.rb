@@ -7,7 +7,7 @@ class CheckoutPage
     @wait = wait
   end
 
-  def openPage(url)
+  def open_page(url)
     @driver.get url
     @driver.manage.window.maximize
     sleep 1

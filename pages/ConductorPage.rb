@@ -7,7 +7,7 @@ class ConductorPage
     @wait = wait
   end
 
-  def openPage
+  def open_page
     @driver.get ENV['CONDUCTOR_ENV']
     @driver.manage.window.maximize
     sleep 1

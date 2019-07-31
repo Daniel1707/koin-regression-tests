@@ -4,75 +4,143 @@ require 'cpf_cnpj'
 class IncludeJson
 
   @include_body = '{
-      "OrderID": "sadsda52344",
-      "Proposal": "",
-      "Currency": "BRL",
-      "TotalPrice": "722.1",
-      "Buyer": {
-          "Name": "Postman - API Include",
-          "Email": "teste@koin.com",
-          "Documents": [
-              {
-                  "Type": "CPF",
-                  "Number": ""
-              }
-          ],
-          "Phones": [
-              {
-                  "AreaCode": "11",
-                  "Number": "999398411"
-              }
-          ],
-          "Address": {
-              "ZipCode": "30160913",
-              "Street": "Rua Rio de Janeiro 909",
-              "Number": "909",
-              "Complement": "",
-              "City": "Belo Horizonte",
-              "State": "MG",
-              "Country": "Brasil",
-              "Type": "1"
-          }
-      },
-      "Shipping": {
-          "UseDate": "2019-08-04",
-          "Price": "0.00",
-          "Address": null
-      },
-      "Items": [
-          {
-              "Reference": "101041441-1",
-              "Description": "Origem no aeroporto GRU, com destino no aeroporto YYZ",
-              "Quantity": "1",
-              "Price": "722.1",
-              "Category": "Passagem"
-          }
-      ],
-      "AdditionalParameters": {
-          "ExpirationDate": "2019-10-10 20:25:00",
-          "SalesChannelId": "3"
-      },
-      "ProductType": [
-          "Airline"
-      ],
-      "AdditionalData": {
-          "AirlineData": {
-              "Legs": [
-                  {
-                      "LegNumber": "1",
-                      "Origin": "GRU",
-                      "Destination": "YYZ",
-                      "DepartureTime": "2020-08-04 21:40:00"
-                  }
-              ],
-              "Passengers": [
-                  {
-                      "PassengerName": "ROSÂNGELA HUDSON JANUÁRIO"
-                  }
-              ]
-          }
+  "IdPaymentRequest": "",
+  "OrderID": "{{CPF}}",
+  "Currency": "BRL",
+  "TotalPrice": "1000.00",
+  "Proposal": "",
+  "DiscountValue": "00.00",
+  "IncreaseValue": "00.00",
+  "ProductType": [
+    "Airline",
+    "Lodging"
+  ],
+  "Buyer": {
+    "Name": "Postman - API Include",
+    "Email": "{{CPF}}@koin.com",
+    "BirthDate": "",
+    "BuyerStatus": "",
+    "Documents": [
+      {
+        "Type": "CPF",
+        "Number": "{{CPF}}"
       }
-  }'
+    ],
+    "Phones": [
+      {
+        "AreaCode": "98",
+        "Number": "92929-9292"
+      }
+    ],
+    "Address": {
+      "City": "Belo Horizonte",
+      "State": "RJ",
+      "Country": "Brasil",
+      "District": "Centro",
+      "Street": "Rua Rio de Janeiro 909",
+      "Number": "804",
+      "Complement": "",
+      "ZipCode": "30160-913",
+      "Type": "1"
+    }
+  },
+  "Shipping": {
+    "Address": {
+      "City": "Feira de Santana",
+      "State": "BA",
+      "Country": "Brasil",
+      "District": "Centro",
+      "Street": "Rua Rio de Janeiro 909",
+      "Number": "804",
+      "Complement": "",
+      "ZipCode": "44024-452",
+      "Type": "1"
+    },
+    "Price": "00.00",
+    "UseDate": "2020-10-30"
+  },
+  "Items": [
+    {
+      "Reference": "01234",
+      "Category": "105050",
+      "Description": "Pacote_hotel",
+      "Quantity": "11",
+      "Price": "100.00"
+    }
+  ],
+  "AdditionalParameters": {
+    "ExpirationDate": "2019-10-23 09:37:00",
+    "UserExpirationDate": "2020-05-09 17:24:00",
+    "IntermediateId": "01324567890132456789",
+    "SalesChannelId": "3",
+    "MaxInstallments": "0",
+    "FixInstallments": "2"
+  },
+  "AdditionalData": {
+    "AirlineData": {
+      "Legs": [
+        {
+          "LegNumber": "1",
+          "Origin": "CGH",
+          "Destination": "REC",
+          "FlightNumber": "1063",
+          "DepartureTime": "2019-07-14 15:00:00",
+          "StopOverAllowed": "Y",
+          "IdClass": "F",
+          "AirlineRefund": "N"
+        }
+      ],
+      "Passengers": [
+        {
+          "PassengerName": "Nome Completo do Passageiro 1",
+          "PassengerEmail": "passageiro1@dominio.com",
+          "PassengerPhone": "552133665591",
+          "PassengerBirthDate": "1958-12-22",
+          "PassengerRating": "Adult",
+          "PassengerStatus": "Gold",
+          "PassengerNationality": "Brasil",
+          "PassengerDocuments": [
+            {
+              "Type": "CPF",
+              "Number": "396.469.778-80"
+            }
+          ]
+        }
+      ]
+    },
+    "LodgingData": {
+      "LodgingName": "Pousada Porto Mar",
+      "CheckInDate": "2019-04-05",
+      "CheckOutDate": "2019-04-13",
+      "Duration": "7",
+      "LodgingRefund": "N",
+      "LodgingAddress": {
+        "ZipCode": "01311-300",
+        "Street": "Av. Paulista",
+        "Number": "1728",
+        "Complement": "7 andar",
+        "District": "Bela Vista",
+        "City": "São Paulo",
+        "State": "SP",
+        "Country": "Brasil",
+        "Type": "1"
+      },
+      "lodgers": [
+        {
+          "LodgerName": "TESTE DAVID CAIO",
+          "LodgerEmail": "hospede@dominio.com",
+          "LodgerPhone": "552133665591",
+          "LodgerDocuments": [
+            {
+              "Type": "CPF",
+              "Number": "396.469.778-80"
+            }
+          ]
+        }
+      ]
+    }
+  }
+}'
 
   def self.get_body
     return JSON.parse(@include_body)
@@ -90,6 +158,8 @@ class IncludeJson
     body_json["Buyer"]["Email"] = "#{@cpf.to_s}@koin.com.br"
     body = body_json.to_json
 
+    p "INCLUDE BODY #{body}"
+
     return body
   end
 
@@ -105,6 +175,8 @@ class IncludeJson
     body_json["Buyer"]["Email"] = "#{@cpf.to_s}@koin.com.br"
     body = body_json.to_json
 
+    p "INCLUDE BODY #{body}"
+
     return body
   end
 
@@ -119,6 +191,8 @@ class IncludeJson
     body_json["Buyer"]["Documents"][0]["Number"] = @cpf.to_s
     body_json["Buyer"]["Email"] = "#{@cpf.to_s}@koin.com.br"
     body = body_json.to_json
+
+    p "INCLUDE BODY #{body}"
 
     return body
   end

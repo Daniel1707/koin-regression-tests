@@ -8,7 +8,7 @@ Given("we navigate to the lojista login page") do
   @wait = config_driver.get_wait
 
   @lojista_page = LojistaPage.new(@driver, @wait)
-  @lojista_page.openPage
+  @lojista_page.open_page
 end
 
 When(/^fill user (\d+) and password (\d+)$/) do |user, password|
@@ -44,6 +44,7 @@ And("fill solicitation with new data") do
   @pedidoRandom = rand(10000000..99999999)
   @amount = "500000"
   @cpf = CPF.generate
+  ENV['CPF'] = @cpf
 
   @lojista_page.fillPaymentSolicitation(@pedidoRandom, @cpf, "20112019", @amount)
   @lojista_page.clickConsultAvailability
@@ -51,7 +52,7 @@ And("fill solicitation with new data") do
 end
 
 And(/^fill solicitation with CPF (\d+)$/) do |cpf|
-  @pedidoRandom = rand(10000000..99999999)
+  @pedidoRandom = rand(100000000..999999999)
   @amount = "500000"
   ENV['CPF'] = cpf
 
@@ -61,7 +62,12 @@ And(/^fill solicitation with CPF (\d+)$/) do |cpf|
 end
 
 And("fill data buyer with new data confirming solicitation") do
-  @lojista_page.fillIncludeSolicitation("Teste", "Teste", "17/07/1991", "(99)99999-9999", "#{@pedidoRandom}@koin.com.br", "06122-100", "12")
+
+  email = ENV['EMAIL_BUYER']
+  number_random = rand(1000..9999)
+
+  # @lojista_page.fillIncludeSolicitation("Teste", "Teste", "17/07/1991", "(99)99999-9999", "#{@pedidoRandom}@koin.com.br", "06122-100", "12")
+  @lojista_page.fillIncludeSolicitation("Teste", "Teste", "17/07/1991", "(99)99999-#{number_random}", email, "06122-100", "12")
 
   @lojista_page.clickHospedagem
 
@@ -75,18 +81,22 @@ end
 
 And("we navigate to the Aquarius login page") do
   @aquarius_page = AquariusPage.new(@driver, @wait)
-  @aquarius_page.openPage
+  @aquarius_page.open_page
 end
 
 And("login with valid user in Aquarius") do
   @aquarius_page.login(ENV['AQUARIUS_USER'], ENV['AQUARIUS_PASSWORD'])
 end
 
-And("get email confirmation from Aquarius") do
-  @aquarius_page.click_on_comunication_log
-  @aquarius_page.fill_comunication_log(@cpf)
-  @aquarius_page.click_on_send_date
-  p "PHONE: #{@aquarius_page.get_part_link_from_phone}"
+And("get email confirmation from Email") do
+  today = "2019-07-31"
+  email = Email.new(ENV['EMAIL_BUYER'], ENV['PASSWORD_BUYER'])
+
+  purchase_link = email.get_purchase_link(today, ENV['EMAIL_KOIN'])
+  # url_checkout = ENV['CHECKOUT_URL'] + purchase_link
+
+  ENV['CHECKOUT_COMPLETE_URL'] = purchase_link
+  p "URL CHECKOUT: #{purchase_link}"
 end
 
 And("go to Manual Analyse") do
@@ -96,4 +106,13 @@ end
 Then(/^internal code is equal to ([^"]*)$/) do |internal_code|
   has_internal_code = @aquarius_page.has_data_transaction(internal_code)
   Validator.check(has_internal_code, true, "Did not find internal code #{internal_code}.")
+end
+
+And("open checkout link") do
+  config_driver = ConfigDriver.new("chrome")
+  @driver = config_driver.get_driver
+  @wait = config_driver.get_wait
+
+  @checkout_page = CheckoutPage.new(@driver, @wait)
+  @checkout_page.open_page(ENV['CHECKOUT_COMPLETE_URL'])
 end

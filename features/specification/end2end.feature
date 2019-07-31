@@ -39,7 +39,7 @@ Scenario: Order from include and approve automatic
   Then system will finish purchase with sucessuful and status Compra aprovada!
 
 Scenario: Order from include and disapprove automatic
-  Given create valid data to include API using CPF approved automatic
+  Given create valid data to include API using CPF disapproved automatic
   When send data to include
   Then system return message that buyer can not use koin
 
@@ -66,17 +66,15 @@ Scenario: Order from include and approve in manual analyse
   When go to list accounts and search account using cpf
   Then carnê is show
 
-
-
-
-
-
 Scenario: Manual Analyse Approve from seller page
   Given we navigate to the lojista login page
   When fill user 77754962000160 and password 123456
   And go to Solicitar Pagamentos
   And fill solicitation with new data
   And fill data buyer with new data confirming solicitation
-  And we navigate to the Aquarius login page
-  And login with valid user in Aquarius
-  And get email confirmation from Aquarius
+  And get email confirmation from Email
+  And open checkout link
+  When accept purchase in in cash without fill data
+  Then system will finish purchase with sucessuful and status Pedido em análise
+  When go to Aquarius and open order in manual analyse using CPF
+  Then cancel order

@@ -13,18 +13,20 @@ class ConfigDriver
 
   Selenium::WebDriver::Chrome::Service.driver_path=File.join(File.absolute_path(File.dirname(__FILE__)),"../driver","chromedriver.exe")
 
-  options = Selenium::WebDriver::Chrome::Options.new#(args: ['headless'])
-  options.add_argument('--ignore-certificate-errors')
-  options.add_argument('--disable-popup-blocking')
-  options.add_argument('--disable-translate')
+  $options = Selenium::WebDriver::Chrome::Options.new#(args: ['headless'])
+  $options.add_argument('--ignore-certificate-errors')
+  $options.add_argument('--disable-popup-blocking')
+  $options.add_argument('--disable-translate')
 
-  options.add_argument('--no-sandbox')
-  options.add_argument('--disable-gpu')
-  options.add_argument('--disable-dev-shm-usage')
-  $driver = Selenium::WebDriver.for :chrome, options: options
+  $options.add_argument('--no-sandbox')
+  $options.add_argument('--disable-gpu')
+  $options.add_argument('--disable-dev-shm-usage')
+  $driver = Selenium::WebDriver.for :chrome, options: $options
   $wait = Selenium::WebDriver::Wait.new(:timeout => 10)
 
   def get_driver
+    # $driver.close
+    # $driver_ = Selenium::WebDriver.for :chrome, options: $options
     return $driver
   end
 
