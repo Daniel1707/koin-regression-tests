@@ -11,7 +11,13 @@ class ConfigDriver
   #caps = Selenium::WebDriver::Remote::Capabilities.send(@brownser)
   #@driver = Selenium::WebDriver.for(:remote, url: "http://192.168.99.100:4444/wd/hub", desired_capabilities: caps)
 
-  Selenium::WebDriver::Chrome::Service.driver_path=File.join(File.absolute_path(File.dirname(__FILE__)),"../driver","chromedriver.exe")
+  if ENV['SYS'].eql? "linux"
+    ENV['DRIVER'] = "chromedriver"
+  else
+    ENV['DRIVER'] = "chromedriver.exe"
+  end
+  
+  Selenium::WebDriver::Chrome::Service.driver_path=File.join(File.absolute_path(File.dirname(__FILE__)),"../driver",ENV['DRIVER'])
 
   $options = Selenium::WebDriver::Chrome::Options.new#(args: ['headless'])
   $options.add_argument('--ignore-certificate-errors')

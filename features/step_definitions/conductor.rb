@@ -3,16 +3,26 @@ require 'json'
 AppEnvironment.get_environment_variables
 
 When("navigate to the Conductor login page") do
-  config_driver = ConfigDriver.new("chrome")
-  @driver = config_driver.get_driver
-  @wait = config_driver.get_wait
+  begin
+    config_driver = ConfigDriver.new("chrome")
+    @driver = config_driver.get_driver
+    @wait = config_driver.get_wait
 
-  @conductor_page = ConductorPage.new(@driver, @wait)
-  @conductor_page.open_page
+    @conductor_page = ConductorPage.new(@driver, @wait)
+    @conductor_page.open_page
+  rescue Exception => e
+    Screenshot.take("navigate to the Conductor login page", @driver)
+    raise e
+  end
 end
 
 When("login") do
-  @conductor_page.login(ENV['CONDUCTOR_USER'], ENV['CONDUCTOR_PASSWORD'])
+  begin
+    @conductor_page.login(ENV['CONDUCTOR_USER'], ENV['CONDUCTOR_PASSWORD'])
+  rescue Exception => e
+    Screenshot.take("login", @driver)
+    raise e
+  end
 end
 
 When("go to list accounts and search account using cpf") do
