@@ -51,7 +51,7 @@ Scenario: Order from include and disapprove in manual analyse for reason Sem Con
 
 Scenario: Order from include and approve automatic
 
-Scenario: Order from include and disapprove automatic
+Scenario: Order from include and disapprove automatic (Esta com erro pois o CPF que deveria reprovar automaticamente não esta fazendo isso)
 
 Scenario: Order from request and cancel by scheduler
 
