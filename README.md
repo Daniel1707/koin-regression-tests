@@ -27,6 +27,7 @@ gmail: Gem para interagir com e-mail do Gmail;
 https://github.com/gmailgem/gmail
 
 *- Padrões utilizados*
+
 PageObect: https://medium.com/@nelson.souza/page-object-design-pattern-ed5f6374d32d
 
 *- Testes mapeados*
