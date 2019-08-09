@@ -56,9 +56,9 @@ Scenario: Manual Analyse Approve from seller page
 
 <h2>- Como executar</h2>
 
-Como default os testes são executados em PRE-PRD caso o ambiente não seja informado. Para executar testes em novos ambientes, insira os dados no arquivo features/env/AppEnvironment.rb;
+Para executar testes em novos ambientes, insira os dados do ambiente no arquivo features/env/AppEnvironment.rb;
 
-Executar todas as features de teste no ambiente PRE-PRD:
+Executar todas as features de teste no ambiente default:
 . cucumber features/specification
 
 Executar todas as features de teste escolhendo um ambiente(Risks nesse exemplo):
@@ -71,7 +71,7 @@ No log irá mostrar as features em execução e ao final as features com erro.
 
 <h2>OBS:</h2>
 
-Com a branch docker usando o comando docker-compose up as vezes da erro pois o container do chrome driver nao consegue registrar no container do hub, por isso a maneira que foi encontrada de executar no momento foi:
+Com a branch **docker** usando o comando **docker-compose** up as vezes da erro pois o container do **chrome** nao consegue registrar no container do **hub**, por isso a maneira que foi encontrada de executar no momento foi:
 1. docker-compose up -d
 2. docker-compose up;
 
@@ -81,3 +81,4 @@ Com a branch docker usando o comando docker-compose up as vezes da erro pois o c
 1. Retirar os sleep e ver alguma forma de esperar mais após o momento que os elementos são encontrados. Coloquei alguns sleeps pois mesmo usando o wait do selenium, ao clicar no elemento algumas vezes ainda não é possivel clicar o elemento apesar de estar visivel;
 2. Conexão com banco de dados para manipular massa de dados;
 3. Integrar com Jenkins;
+4. Verificar forma de executar docker-compose sem erro de registro do nó no hub;
