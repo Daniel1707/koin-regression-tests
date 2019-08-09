@@ -59,11 +59,13 @@ Executar feature específica de teste escolhendo um ambiente(Risks nesse exemplo
 . cucumber features/specification/end2end.feature env=hmg-risks
 
 No log irá mostrar as features em execução e ao final as features com erro.
+
+
 Idéias para o futuro
 
-Retirar os sleep e ver alguma forma de esperar mais após o momento que os elementos são encontrados. Coloquei alguns sleeps pois mesmo usando o wait do selenium, ao clicar no elemento algumas vezes ainda não é possivel clicar o elemento apesar de estar visivel;
-Com a branch docker usando o comando docker-compose up as vezes da erro pois o container do chrome driver nao consegue registrar no container do hub, por isso a maneira que foi encontrada de executar no momento foi:
+1. Retirar os sleep e ver alguma forma de esperar mais após o momento que os elementos são encontrados. Coloquei alguns sleeps pois mesmo usando o wait do selenium, ao clicar no elemento algumas vezes ainda não é possivel clicar o elemento apesar de estar visivel;
+2. Com a branch docker usando o comando docker-compose up as vezes da erro pois o container do chrome driver nao consegue registrar no container do hub, por isso a maneira que foi encontrada de executar no momento foi:
 docker-compose up -d
 docker-compose up;
-Conexão com banco de dados para manipular massa de dados;
-Integrar com Jenkins;
+3. Conexão com banco de dados para manipular massa de dados;
+4. Integrar com Jenkins;
