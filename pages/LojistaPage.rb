@@ -97,6 +97,13 @@ class LojistaPage
     @driver.find_element(:id, "numCasaPedido").send_keys(number)
   end
 
+  def click_additional_item
+    item = @wait.until { @driver.find_element(:xpath, '//div[text()="
+                Itens adicionais do Pedido
+                "]//label') }
+    item.click
+  end
+
   def clickHospedagem
     hospedagem = @wait.until { @driver.find_element(:xpath, '//button[text()="Hospedagem"]') }
     hospedagem.click
