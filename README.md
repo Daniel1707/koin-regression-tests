@@ -1,36 +1,37 @@
 ***<h1>Projeto de testes automatizados</h1>***
 
-*- Ferramentas utilizadas*
+<h2>- Ferramentas utilizadas</h2>
 
-Ruby: Fácil aprendizado e simples de iniciar;
+*Ruby:* Fácil aprendizado e simples de iniciar;
 https://rubyinstaller.org/
 
-Bundler: Para gerenciar as gems(bibliotecas) do ruby;
+*Bundler:* Para gerenciar as gems(bibliotecas) do ruby;
 https://bundler.io/
 
 
-*- Gems utilizadas*
+<h2>- Gems utilizadas</h2>
 
-selenium-webdriver: Gem para realizar a automação dos testes de interface;
+*selenium-webdriver:* Gem para realizar a automação dos testes de interface;
 https://www.seleniumhq.org/
 
-cpf_cnpj: Gem para ajudar na criação de massa de teste, criando cpf e cnpj;
+*cpf_cnpj:* Gem para ajudar na criação de massa de teste, criando cpf e cnpj;
 https://github.com/fnando/cpf_cnpj
 
-cucumber: Gem para auxiliar na leitura dos testes;
+*cucumber:* Gem para auxiliar na leitura dos testes;
 https://cucumber.io/
 
-httparty: Gem para realizar chamadas para as APIs;
+*httparty:* Gem para realizar chamadas para as APIs;
 https://github.com/jnunemaker/httparty
 
-gmail: Gem para interagir com e-mail do Gmail;
+*gmail:* Gem para interagir com e-mail do Gmail;
 https://github.com/gmailgem/gmail
 
-*- Padrões utilizados*
+<h2>- Padrões utilizados</h2>
 
-PageObect: https://medium.com/@nelson.souza/page-object-design-pattern-ed5f6374d32d
+*PageObect:* Padrão utlizado para mapear páginas html; 
+https://medium.com/@nelson.souza/page-object-design-pattern-ed5f6374d32d
 
-*- Testes mapeados*
+<h2>- Testes mapeados</h2>
 
 Scenario: Create authorization
 Scenario: Create check
@@ -43,7 +44,7 @@ Scenario: Order from request and cancel by scheduler
 Scenario: Order from include and approve in manual analyse
 Scenario: Manual Analyse Approve from seller page
 
-*- Como executar*
+<h2>- Como executar</h2>
 
 Como default os testes são executados em PRE-PRD caso o ambiente não seja informado. Para executar testes em novos ambientes, insira os dados no arquivo features/env/AppEnvironment.rb;
 
@@ -65,7 +66,7 @@ Com a branch docker usando o comando docker-compose up as vezes da erro pois o c
 2. docker-compose up;
 
 
-*- Idéias para o futuro*
+<h2>- Idéias para o futuro</h2>
 
 1. Retirar os sleep e ver alguma forma de esperar mais após o momento que os elementos são encontrados. Coloquei alguns sleeps pois mesmo usando o wait do selenium, ao clicar no elemento algumas vezes ainda não é possivel clicar o elemento apesar de estar visivel;
 2. Conexão com banco de dados para manipular massa de dados;
