@@ -1,6 +1,6 @@
-***Projeto de testes automatizados
+***Projeto de testes automatizados***
 
-Ferramentas utilizadas
+*Ferramentas utilizadas*
 
 Ruby: Fácil aprendizado e simples de iniciar;
 https://rubyinstaller.org/
@@ -9,7 +9,7 @@ Bundler: Para gerenciar as gems(bibliotecas) do ruby;
 https://bundler.io/
 
 
-Gems utilizadas
+*Gems utilizadas*
 
 selenium-webdriver: Gem para realizar a automação dos testes de interface;
 https://www.seleniumhq.org/
@@ -28,7 +28,7 @@ https://github.com/gmailgem/gmail
 
 
 
-Testes mapeados
+*Testes mapeados*
 
 Scenario: Create authorization
 Scenario: Create check
@@ -45,7 +45,7 @@ Scenario: Manual Analyse Approve from seller page
 
 
 
-Como executar
+*Como executar*
 
 Como default os testes são executados em PRE-PRD caso o ambiente não seja informado. Para executar testes em novos ambientes, insira os dados no arquivo features/env/AppEnvironment.rb;
 
@@ -67,7 +67,7 @@ Com a branch docker usando o comando docker-compose up as vezes da erro pois o c
 2. docker-compose up;
 
 
-Idéias para o futuro
+*Idéias para o futuro*
 
 1. Retirar os sleep e ver alguma forma de esperar mais após o momento que os elementos são encontrados. Coloquei alguns sleeps pois mesmo usando o wait do selenium, ao clicar no elemento algumas vezes ainda não é possivel clicar o elemento apesar de estar visivel;
 2. Conexão com banco de dados para manipular massa de dados;
