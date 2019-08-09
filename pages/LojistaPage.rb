@@ -102,6 +102,13 @@ class LojistaPage
     hospedagem.click
   end
 
+  def click_additional_item
+    item = @wait.until { @driver.find_element(:xpath, '//div[text()="
+                Itens adicionais do Pedido
+                "]//label') }
+    item.click
+  end
+
   def fillHospedagem(nameHospedagemValue, checkInDate, checkOutDate, namePassenger, surnamePassenger)
     nameHospedagem = @wait.until { @driver.find_element(:id, "lodgingName") }
     nameHospedagem.send_keys(nameHospedagemValue)

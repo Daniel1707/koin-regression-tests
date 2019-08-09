@@ -119,6 +119,8 @@ And("fill data buyer with new data confirming solicitation") do
     @lojista_page.fillHospedagem("Teste Hospede", "20112019", "25112019", "Teste", "Teste")
     @lojista_page.clickAddGuest
 
+    @lojista_page.click_additional_item
+
     @lojista_page.fillOrderData(@pedidoRandom, "20112019", "1200", @amount)
     @lojista_page.clickRequestPaymentSolicitation
     @lojista_page.clickConfirmSolicitation
