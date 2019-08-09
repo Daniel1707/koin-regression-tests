@@ -27,7 +27,7 @@ gmail: Gem para interagir com e-mail do Gmail;
 https://github.com/gmailgem/gmail
 
 *- Padrões utilizados*
-PageObect
+PageObect: https://medium.com/@nelson.souza/page-object-design-pattern-ed5f6374d32d
 
 *- Testes mapeados*
 
@@ -41,10 +41,6 @@ Scenario: Order from include and disapprove automatic
 Scenario: Order from request and cancel by scheduler
 Scenario: Order from include and approve in manual analyse
 Scenario: Manual Analyse Approve from seller page
-
-
-
-
 
 *- Como executar*
 
