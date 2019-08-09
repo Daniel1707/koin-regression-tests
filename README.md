@@ -1,11 +1,14 @@
 ***<h1>Projeto de testes automatizados</h1>***
 
+
 <h2>- Ferramentas utilizadas</h2>
 
 *Ruby:* Fácil aprendizado e simples de iniciar;
+
 https://rubyinstaller.org/
 
 *Bundler:* Para gerenciar as gems(bibliotecas) do ruby;
+
 https://bundler.io/
 
 
@@ -31,11 +34,13 @@ https://github.com/jnunemaker/httparty
 
 https://github.com/gmailgem/gmail
 
+
 <h2>- Padrões utilizados</h2>
 
 *PageObect:* Padrão utlizado para mapear páginas html; 
 
 https://medium.com/@nelson.souza/page-object-design-pattern-ed5f6374d32d
+
 
 <h2>- Testes mapeados</h2>
 
