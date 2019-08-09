@@ -1,4 +1,4 @@
-***<h1>Projeto de testes automatizados<h1>***
+***<h1>Projeto de testes automatizados</h1>***
 
 *- Ferramentas utilizadas*
 
