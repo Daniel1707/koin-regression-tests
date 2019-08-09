@@ -34,15 +34,25 @@ https://medium.com/@nelson.souza/page-object-design-pattern-ed5f6374d32d
 <h2>- Testes mapeados</h2>
 
 Scenario: Create authorization
+
 Scenario: Create check
+
 Scenario: Order from include and cancel in manual analyse
+
 Scenario: Order from request and cancel in manual analyse
+
 Scenario: Order from include and disapprove in manual analyse for reason Sem Contato
+
 Scenario: Order from include and approve automatic
+
 Scenario: Order from include and disapprove automatic
+
 Scenario: Order from request and cancel by scheduler
+
 Scenario: Order from include and approve in manual analyse
+
 Scenario: Manual Analyse Approve from seller page
+
 
 <h2>- Como executar</h2>
 
