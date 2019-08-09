@@ -13,6 +13,3 @@ RUN bundle install
 
 # Upload source
 COPY . $APP_HOME
-
-# Start server
-CMD ["cucumber"]

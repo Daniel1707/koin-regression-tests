@@ -9,7 +9,6 @@ class LojistaPage
 
   def open_page
     @driver.get ENV['LOJISTA_ENV']
-    @driver.manage.window.maximize
     sleep 1
   end
 
@@ -48,6 +47,7 @@ class LojistaPage
   end
 
   def clickRequestPayment
+    sleep 10
     requestPayment = @wait.until { @driver.find_element(:xpath, "//a[@href='/solicitarPagamento']") }
     requestPayment.click
   end

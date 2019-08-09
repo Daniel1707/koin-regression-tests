@@ -1,0 +1,25 @@
+version: "2"
+services:
+
+  app:
+    build: .
+    depends_on:
+      - hub
+      - chrome
+    command: cucumber features/specification/end2end.feature
+    environment:
+      ENV: hmg-risks
+
+  chrome:
+    image: selenium/node-chrome:3.14.0-gallium
+    volumes:
+      - /dev/shm:/dev/shm
+    depends_on:
+      - hub
+    environment:
+      HUB_HOST: hub
+
+  hub:
+    image: selenium/hub:3.14.0-gallium
+    ports:
+      - "4444:4444"

@@ -8,32 +8,14 @@ class ConfigDriver
     @brownser = brownser
   end
 
-  #caps = Selenium::WebDriver::Remote::Capabilities.send(@brownser)
-  #@driver = Selenium::WebDriver.for(:remote, url: "http://192.168.99.100:4444/wd/hub", desired_capabilities: caps)
-
-  if ENV['SYS'].eql? "linux"
-    ENV['DRIVER'] = "chromedriver"
-  else
-    ENV['DRIVER'] = "chromedriver.exe"
-  end
-  
-  Selenium::WebDriver::Chrome::Service.driver_path=File.join(File.absolute_path(File.dirname(__FILE__)),"../driver",ENV['DRIVER'])
-
-  $options = Selenium::WebDriver::Chrome::Options.new#(args: ['headless'])
-  $options.add_argument('--ignore-certificate-errors')
-  $options.add_argument('--disable-popup-blocking')
-  $options.add_argument('--disable-translate')
-
-  $options.add_argument('--no-sandbox')
-  $options.add_argument('--disable-gpu')
-  $options.add_argument('--disable-dev-shm-usage')
-  $driver = Selenium::WebDriver.for :chrome, options: $options
-  $wait = Selenium::WebDriver::Wait.new(:timeout => 10)
+  client = Selenium::WebDriver::Remote::Http::Default.new
+  client.timeout = 600
+  chrome_capabilities = Selenium::WebDriver::Remote::Capabilities.chrome()
+  $chrome = Selenium::WebDriver.for(:remote, :url => 'http://hub:4444/wd/hub', :desired_capabilities => chrome_capabilities, :http_client => client)
+  $wait = Selenium::WebDriver::Wait.new()
 
   def get_driver
-    # $driver.close
-    # $driver_ = Selenium::WebDriver.for :chrome, options: $options
-    return $driver
+    return $chrome
   end
 
   def get_wait

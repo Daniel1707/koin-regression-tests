@@ -107,6 +107,7 @@ Then("order will be expired by scheduler") do
   sleep 140
   begin
     @aquarius_page.select_status_from_manual_analyse("Finalizado")
+    sleep 5
     @aquarius_page.click_on_consult
     sleep 5
 

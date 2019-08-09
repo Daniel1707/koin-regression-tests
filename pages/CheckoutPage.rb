@@ -9,7 +9,6 @@ class CheckoutPage
 
   def open_page(url)
     @driver.get url
-    @driver.manage.window.maximize
     sleep 1
   end
 

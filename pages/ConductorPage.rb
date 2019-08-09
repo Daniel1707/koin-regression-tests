@@ -9,7 +9,6 @@ class ConductorPage
 
   def open_page
     @driver.get ENV['CONDUCTOR_ENV']
-    @driver.manage.window.maximize
     sleep 1
   end
 
@@ -43,7 +42,7 @@ class ConductorPage
   end
 
   def click_on_to_view
-    sleep 2
+    sleep 4
     to_view = @wait.until { @driver.find_element(:xpath, "//img[@title='Visualizar']/../../a") }
     to_view.click
   end

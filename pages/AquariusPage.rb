@@ -9,7 +9,6 @@ class AquariusPage
 
   def open_page
     @driver.get ENV['ACQUARIUS_ENV']
-    @driver.manage.window.maximize
     sleep 1
   end
 
@@ -29,6 +28,7 @@ class AquariusPage
 
   def login(user, password)
     user_name = ENV['AQUARIUS_NAME'].dup
+
     found_user_name = is_logged(user_name.force_encoding(Encoding::UTF_8))
 
     if found_user_name.eql? true
@@ -74,6 +74,7 @@ class AquariusPage
   def click_on_consult
     consult_button = @wait.until { @driver.find_element(:xpath, '//button[text()=" Consultar
                         "]') }
+    sleep 5
     consult_button.click
   end
 
