@@ -12,23 +12,29 @@ https://bundler.io/
 <h2>- Gems utilizadas</h2>
 
 *selenium-webdriver:* Gem para realizar a automação dos testes de interface;
+
 https://www.seleniumhq.org/
 
 *cpf_cnpj:* Gem para ajudar na criação de massa de teste, criando cpf e cnpj;
+
 https://github.com/fnando/cpf_cnpj
 
 *cucumber:* Gem para auxiliar na leitura dos testes;
+
 https://cucumber.io/
 
 *httparty:* Gem para realizar chamadas para as APIs;
+
 https://github.com/jnunemaker/httparty
 
 *gmail:* Gem para interagir com e-mail do Gmail;
+
 https://github.com/gmailgem/gmail
 
 <h2>- Padrões utilizados</h2>
 
 *PageObect:* Padrão utlizado para mapear páginas html; 
+
 https://medium.com/@nelson.souza/page-object-design-pattern-ed5f6374d32d
 
 <h2>- Testes mapeados</h2>
