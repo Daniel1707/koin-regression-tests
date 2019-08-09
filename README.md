@@ -26,7 +26,8 @@ https://github.com/jnunemaker/httparty
 gmail: Gem para interagir com e-mail do Gmail;
 https://github.com/gmailgem/gmail
 
-
+*- Padrões utilizados*
+PageObect
 
 *- Testes mapeados*
 
